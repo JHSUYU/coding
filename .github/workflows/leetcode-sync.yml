@@ -1,0 +1,28 @@
+name: LeetCode Sync
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  leetcode-sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.x
+
+      - name: Install LeetCode CLI
+        run: pip install leetcode
+
+      - name: Configure LeetCode CLI
+        run: leetcode configure
+
+      - name: Sync LeetCode submissions
+        run: leetcode sync -c -g -o ./leetcode-solutions
